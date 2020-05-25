@@ -3,37 +3,51 @@ package MyJava;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
-public class MyNumber {
+public class MyNumber implements Comparable{
     private int num;
-    private double d;
+    // private double d;
 
     public MyNumber(int n){
         this.num = n;
     }
 
-    private MyNumber(double d){
-        this.d = d;
-    }
+    // private MyNumber(double d){
+    //     this.d = d;
+    // }
 
     public int getNum(){return this.num;}
 
-    public double getD(){return this.d;}
+    // public double getD(){return this.d;}
 
     public String toString(){
         return ""+this.num;
     }
 
     public static void main(String[] args) {
+        Random random = new Random();
         ArrayList<MyNumber> arr = new ArrayList<>();
-        arr.add(new MyNumber(1));
-        arr.add(new MyNumber(-20));
-        arr.add(new MyNumber(60));
-        arr.add(new MyNumber(-100));
+        arr.add(new MyNumber(random.nextInt(800)));
+        arr.add(new MyNumber(random.nextInt(800)));
+        arr.add(new MyNumber(random.nextInt(800)));
+        arr.add(new MyNumber(random.nextInt(800)));
+        arr.add(new MyNumber(random.nextInt(800)));
+        
+        ArrayList<MyNumber> clone = (ArrayList<MyNumber>) arr.clone();
 
         Collections.sort(arr, new intCompare());
-        System.out.print(arr);
+        System.out.println(arr);
 
+        Collections.sort(clone);
+        System.out.println(clone);
+
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        MyNumber m = (MyNumber) o;
+        return this.num - m.getNum();
     }
 }
 
